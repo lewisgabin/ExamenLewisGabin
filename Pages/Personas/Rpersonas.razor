@@ -1,0 +1,152 @@
+@page "/RegistroPersonas"
+@inject IToastService toast
+
+<EditForm Model="personas" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+    <div class="card">
+        <div class="card-header">
+            <h3>Registro personas</h3>
+            <a style="float:right; margin-top: -48px; height: 40px;" class="btn btn-primary" href="ConsultaPersonas">Consultar personas</a>
+        </div>
+
+        <div class="card-body">
+            <form>
+             
+                <div class="form-row align-items-center">
+                    <div class="col">
+                        <div class="form-group">
+                            <label>PersonaId</label>
+                            <div class="input-group">
+                                <InputNumber @bind-Value="personas.PersonaId" class="form-control col-4" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-primary input-group-text" @onclick="Buscar">
+                                        <span class="oi oi-zoom-in"></span> Buscar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-bottom: 25px;">
+                    <div class=" col-md-6">
+                        <label>Nombres</label>
+                        <InputText @bind-Value="personas.Nombres" class="form-control" />
+                        <ValidationMessage For="@(() => personas.Nombres)" />
+                    </div>
+
+            
+                    <div class=" col-md-6">
+                        <label>Telefono</label>
+                        <InputText @bind-Value="personas.Telefono" class="form-control" />
+                        <ValidationMessage For="(() => personas.Telefono)" />
+                    </div>
+                </div>
+
+                <div class="row" style="margin-bottom: 25px;">
+                    <div class="col-md-6">
+                        <label>Cedula</label>
+                        <InputText @bind-Value="personas.Cedula" class="form-control" />
+                        <ValidationMessage For="@(() => personas.Cedula)" />
+                    </div>
+
+        
+                    <div class="col-md-6">
+                        <label>Direccion</label>
+                        <InputText @bind-Value="personas.Direccion" class="form-control" />
+                        <ValidationMessage For="@(() => personas.Direccion)" />
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 25px;">
+                    <div class="col-md-6">
+                        <label>Fecha Nacimiento</label>
+                        <InputDate @bind-Value="personas.FechaNacimiento" class="form-control" />
+                        <ValidationMessage For="@(() => personas.FechaNacimiento)" />
+                    </div>
+
+                
+                    <div class="col-md-6">
+                        <label>Balance</label>
+                        <InputNumber @bind-Value="personas.Balance" class="form-control" readonly />
+                        <ValidationMessage For="@(() => personas.Balance)" />
+                    </div>
+                </div>
+            </form>
+        </div>
+
+   
+        <div class="card-footer">
+            <div class="form-group text-center" display: inline-block>
+
+                <button type="button" class="btn btn-lg btn-primary" @onclick="Nuevo">
+                    <span class="oi oi-plus"></span> Nuevo
+                </button>
+
+                <button type="submit" class="btn btn-lg btn-success">
+                    <span class="oi oi-clipboard" aria-hidden="true"></span> Guardar
+                </button>
+
+                <button type="button" class="btn btn-lg btn-danger" @onclick="Eliminar">
+                    <i class="fa fa-trash"></i>
+                    <span class="oi oi-trash"></span>   Eliminar
+                </button>
+
+            </div>
+        </div>
+    </div>
+</EditForm>
+<BlazoredToasts Timeout="5"
+                ShowProgressBar="true" />
+@code {
+
+    Personas personas = new Personas();
+
+
+    protected override void OnInitialized()
+    {
+        Nuevo();
+        Buscar();
+    }
+
+    private void Nuevo()
+    {
+        personas = new Personas();
+    }
+
+    private void Buscar()
+    {
+        if (personas.PersonaId > 0)
+        {
+            var encontrado = PersonasBLL.Buscar(personas.PersonaId);
+            if (encontrado != null)
+                this.personas = encontrado;
+            else
+                toast.ShowWarning("No encontado");
+        }
+    }
+
+    private void Guardar()
+    {
+        bool guardo;
+        guardo = PersonasBLL.Guardar(personas);
+
+        if (guardo)
+        {
+            Nuevo();
+            toast.ShowSuccess("Guardado correctamente");
+        }
+    }
+
+    private void Eliminar()
+    {
+        bool elimino;
+
+        elimino = PersonasBLL.Eliminar(personas.PersonaId);
+
+        if (elimino)
+        {
+            Nuevo();
+            toast.ShowSuccess("Eliminado correctamente");
+        }
+    }
+}

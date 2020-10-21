@@ -1,0 +1,48 @@
+@page "/ConsultaPersonas"
+<h3>Consulta personas</h3>
+
+@if (personas == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Telefono</th>
+                <th>Cedula</th>
+                <th>Telefono</th>
+                <th>Fecha Nacimiento</th>
+                <th>Balance</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var person in personas)
+            {
+                <tr>
+                    <td>@person.PersonaId</td>
+                    <td>@person.Nombres</td>
+                    <td>@person.Telefono</td>
+                    <td>@person.Cedula</td>
+                    <td>@person.Direccion</td>
+                    <td>@person.FechaNacimiento.ToShortDateString()</td>
+                    <td>@person.Balance</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@code {
+
+    private List<Personas> personas = new List<Personas>();
+
+    protected override void OnInitialized()
+    {
+        personas = PersonasBLL.GetList(x => true);
+    }
+}
