@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "efJxNbznaBjYE2l9tHOjt+HsdXxvl8gC4TVzLaQ0iUMXm2IwJWzEdLnPlk/h1Fmb+FIk9494Jea4V+1vBkcNqw==",
+  "dgSpecHash": "tYZG+uf+KGwaTNyyH/F4WvuDno9Wqtoel3PQ8n3sKKwD0vhoDEju/HyjW93pH8naK4rNdhPzFRsg7UHY57Oqiw==",
   "success": true,
-  "projectFilePath": "C:\\Aplicada2\\Detalle\\PrestamosDetalle\\PrestamosDetalle.csproj",
+  "projectFilePath": "c:\\Aplicada2\\PrestamosDetalle\\PrestamosDetalle.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lewis Gaby\\.nuget\\packages\\blazored.toast\\3.1.2\\blazored.toast.3.1.2.nupkg.sha512",
     "C:\\Users\\Lewis Gaby\\.nuget\\packages\\microsoft.aspnetcore.authorization\\3.1.4\\microsoft.aspnetcore.authorization.3.1.4.nupkg.sha512",

@@ -1427,11 +1427,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Aplicada2\\Detalle\\PrestamosDetalle\\PrestamosDetalle.csproj",
+      "projectUniqueName": "C:\\Aplicada2\\PrestamosDetalle\\PrestamosDetalle.csproj",
       "projectName": "PrestamosDetalle",
-      "projectPath": "C:\\Aplicada2\\Detalle\\PrestamosDetalle\\PrestamosDetalle.csproj",
+      "projectPath": "C:\\Aplicada2\\PrestamosDetalle\\PrestamosDetalle.csproj",
       "packagesPath": "C:\\Users\\Lewis Gaby\\.nuget\\packages\\",
-      "outputPath": "C:\\Aplicada2\\Detalle\\PrestamosDetalle\\obj\\",
+      "outputPath": "C:\\Aplicada2\\PrestamosDetalle\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
