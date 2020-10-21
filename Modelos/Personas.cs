@@ -29,8 +29,9 @@ namespace PrestamosDetalle.Modelos
         [Required]
         public string Direccion { get; set; }
 
-        [Required]
-        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+         [DataType(DataType.DateTime)]
+        [Required(ErrorMessage = "El campo fecha no puede estar vacío.")]
+        [DisplayFormat(DataFormatString = "{0:dd,mm, yyyy}")]
         public DateTime FechaNacimiento { get; set; }
 
         [Required]

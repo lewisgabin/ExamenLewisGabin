@@ -9,7 +9,7 @@ using PrestamosDetalle.DAL;
 namespace PrestamosDetalle.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20201021092940_InitialCreate")]
+    [Migration("20201021151746_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -17,6 +17,45 @@ namespace PrestamosDetalle.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.9");
+
+            modelBuilder.Entity("PrestamosDetalle.Modelos.DetalleMora", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MoraId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PrestamoId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MoraId");
+
+                    b.ToTable("DetalleMora");
+                });
+
+            modelBuilder.Entity("PrestamosDetalle.Modelos.Moras", b =>
+                {
+                    b.Property<int>("MoraId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("MoraId");
+
+                    b.ToTable("Moras");
+                });
 
             modelBuilder.Entity("PrestamosDetalle.Modelos.Personas", b =>
                 {
@@ -81,6 +120,15 @@ namespace PrestamosDetalle.Migrations
                         .IsUnique();
 
                     b.ToTable("Prestamos");
+                });
+
+            modelBuilder.Entity("PrestamosDetalle.Modelos.DetalleMora", b =>
+                {
+                    b.HasOne("PrestamosDetalle.Modelos.Moras", null)
+                        .WithMany("DetalleMora")
+                        .HasForeignKey("MoraId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("PrestamosDetalle.Modelos.Prestamos", b =>

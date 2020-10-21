@@ -1,0 +1,42 @@
+@page "/ConsultaMoras"
+
+<h3>Consulta moras</h3>
+
+@if (moras == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>MoraId</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var mora in moras)
+            {
+                <tr>
+                    <td>@mora.MoraId</td>
+                    <td>@mora.Fecha.ToShortDateString()</td>
+                    <td>@mora.Total</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@code {
+
+    private List<Moras> moras = new List<Moras>();
+    private List<DetalleMora> detalle = new List<DetalleMora>();
+
+    protected override void OnInitialized()
+    {
+        moras = MorasBLL.GetList(x => true);
+       
+    }
+}
