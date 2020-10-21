@@ -1,0 +1,46 @@
+@page "/ConsultaPrestamos"
+<h3>Consulta prestamos</h3>
+
+@if (lista == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>PrestamoId</th>
+                <th>Fecha</th>
+                <th>PersonaId</th>
+                <th>Concepto</th>
+                <th>Monto</th>
+                <th>Balance</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var prestamos in lista)
+            {
+                <tr>
+                    <td>@prestamos.PrestamoId</td>
+                    <td>@prestamos.Fecha.ToShortDateString()</td>
+                    <td>@prestamos.PersonaId</td>
+                    <td>@prestamos.Concepto</td>
+                    <td>@prestamos.Monto</td>
+                    <td>@prestamos.Balance</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@code {
+    private List<Prestamos> lista = new List<Prestamos>();
+
+
+    protected override void OnInitialized()
+    {
+        lista = PrestamosBLL.GetList(x => true);
+    }
+}

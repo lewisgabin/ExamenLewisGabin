@@ -1,0 +1,198 @@
+@page "/RegistroPrestamos"
+@inject IToastService toast
+
+<EditForm Model="prestamos" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+    <div class="card">
+        <div class="card-header">
+            <h3>Registro prestamos</h3>
+            <a style="float:right; margin-top: -48px; height: 40px;" class="btn btn-primary" href="ConsultaPrestamos">Consultar prestamos</a>
+        </div>
+
+        <div class="card-body">
+            <form>
+               
+                <div class="form-row align-items-center">
+                    <div class="col">
+                        <div class="form-group">
+                            <label>PretamoId</label>
+                            <div class="input-group">
+                                <InputNumber @bind-Value="prestamos.PrestamoId" class="form-control col-4" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-primary input-group-text" @onclick="Buscar">
+                                        <span class="oi oi-zoom-in"></span> Buscar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+              
+                <div class="form-group">
+                    <label for="ConceptTextBox">Concepto</label>
+                    <InputText @bind-Value="prestamos.Concepto" class="form-control" id="ConceptTextBox" />
+                    <ValidationMessage For="@(() => prestamos.Concepto)" />
+                   
+                </div>
+
+          
+                <div class="form-group" style="border-top: 1px solid;">
+                    <label>Persona</label>
+                    <InputSelect @bind-Value="@personaId" class="form-control">
+                        <option value="0">Elige el usuario</option>
+                        @foreach (var item in listaPersonas)
+                        {
+                            <option value="@item.PersonaId">@item.Nombres</option>
+                        }
+                    </InputSelect>
+                   
+                </div>
+
+            
+                <div class="form-group">
+                    <label for="LoanDatePicker">Fecha </label>
+                    <InputDate @bind-Value="prestamos.Fecha" class="form-control" id="LoanDatePicker" />
+                    <ValidationMessage For="@(() => prestamos.Fecha)" />
+                   
+                </div>
+
+             
+                <div class="form-group">
+                    <label for="AmountTextBox">Monto</label>
+                    <InputNumber @bind-Value="prestamos.Monto" class="form-control" id="AmountTextBox" />
+                    <ValidationMessage For="@(() => prestamos.Monto)" />
+                   
+                </div>
+
+              
+                <div class="form-group">
+                    <label for="BalanceTextBox">Balance</label>
+                    <input type="number" @bind="prestamos.Balance" class="form-control" id="BalanceTextBox" readonly />
+                    <ValidationMessage For="@(() => prestamos.Balance)" />
+                   
+                </div>
+
+               
+                <div class="form-group">
+                    <label>Deposito</label>
+                    <input @bind="Deposito" class="form-control" />
+                   
+                </div>
+
+            </form>
+        </div>
+
+        
+        <div class="card-footer">
+            <div class="form-group text-center" display: inline-block>
+
+                <button type="button" class="btn btn-lg btn-primary" @onclick="Nuevo">
+                    <span class="oi oi-plus"></span> Nuevo
+                </button>
+
+                <button type="submit" class="btn btn-lg btn-success">
+                    <span class="oi oi-clipboard" aria-hidden="true"></span> Guardar
+                </button>
+
+                <button type="button" class="btn btn-lg btn-danger" @onclick="Eliminar">
+                    <span class="oi oi-trash"></span>   Eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+
+    Prestamos prestamos = new Prestamos();
+    List<Personas> lista = new List<Personas>();
+
+    private string personaId = string.Empty;
+    List<Personas> listaPersonas = new List<Personas>();
+
+    private decimal Deposito;
+
+    protected override void OnInitialized()
+    {
+        Nuevo();
+        Buscar();
+        Deposito = 0;
+        lista = PersonasBLL.GetList(x => true);
+    }
+
+    private void Nuevo()
+    {
+        prestamos = new Prestamos();
+        Deposito = 0;
+        listaPersonas = PersonasBLL.GetList(x => true);
+        personaId = string.Empty;
+
+
+    }
+
+    private void Buscar()
+    {
+        if (prestamos.PrestamoId > 0)
+        {
+            var encontrado = PrestamosBLL.Buscar(prestamos.PrestamoId);
+            if (encontrado != null)
+            {
+                this.prestamos = encontrado;
+                personaId = this.prestamos.PersonaId.ToString();
+            }
+            else
+                toast.ShowWarning("No encontado");
+        }
+    }
+
+    private void Guardar()
+    {
+        bool guardo;
+        VerificarBalanceInicial();
+
+        prestamos.PersonaId = Convert.ToInt32(personaId);
+
+        guardo = PrestamosBLL.Guardar(prestamos);
+        PrestamosBLL.LlenarBalance(prestamos.PersonaId, prestamos.Balance);
+
+        if (guardo)
+        {
+            Nuevo();
+            toast.ShowSuccess("Guardado correctamente");
+        }
+        else
+            toast.ShowError("No Guardo!");
+    }
+
+    private void VerificarBalanceInicial()
+    {
+        if (prestamos.Balance == 0)
+        {
+            prestamos.Balance = prestamos.Monto;
+        }
+        else if (prestamos.Balance > 0)
+        {
+            prestamos.Balance = prestamos.Balance - Deposito;
+        }
+        else if (prestamos.Balance < 0)
+        {
+            prestamos.Balance = 0;
+        }
+    }
+
+    private void Eliminar()
+    {
+        bool elimino;
+
+        elimino = PrestamosBLL.Eliminar(prestamos.PrestamoId);
+        PrestamosBLL.RemoverPrestamo(prestamos.PersonaId);
+
+        if (elimino)
+        {
+            Nuevo();
+            toast.ShowSuccess("Eliminado correctamente");
+        }
+    }
+
+}

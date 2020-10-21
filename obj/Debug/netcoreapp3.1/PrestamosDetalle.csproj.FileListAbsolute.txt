@@ -96,3 +96,7 @@ C:\Aplicada2\PrestamosDetalle\bin\Debug\netcoreapp3.1\Microsoft.JSInterop.dll
 C:\Aplicada2\PrestamosDetalle\obj\Debug\netcoreapp3.1\Razor\Pages\Personas\Rpersonas.razor.g.cs
 C:\Aplicada2\PrestamosDetalle\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Consultas\ConsultaPersonas.razor.g.cs
 C:\Aplicada2\PrestamosDetalle\obj\Debug\netcoreapp3.1\Razor\Pages\Consultas\ConsultaPersonas.razor.g.cs
+C:\Aplicada2\PrestamosDetalle\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Prestamos\Rprestamos.razor.g.cs
+C:\Aplicada2\PrestamosDetalle\obj\Debug\netcoreapp3.1\Razor\Pages\Prestamos\Rprestamos.razor.g.cs
+C:\Aplicada2\PrestamosDetalle\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Consultas\ConsultaPrestamos.razor.g.cs
+C:\Aplicada2\PrestamosDetalle\obj\Debug\netcoreapp3.1\Razor\Pages\Consultas\ConsultaPrestamos.razor.g.cs

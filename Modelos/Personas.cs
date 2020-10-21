@@ -36,6 +36,7 @@ namespace PrestamosDetalle.Modelos
         [Required]
         public decimal Balance { get; set; }
 
+        public Prestamos Prestamos { get; set; }
 
     }
 }

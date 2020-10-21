@@ -9,7 +9,7 @@ using PrestamosDetalle.DAL;
 namespace PrestamosDetalle.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20201021083358_InitialCreate")]
+    [Migration("20201021092940_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,7 +18,7 @@ namespace PrestamosDetalle.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.9");
 
-            modelBuilder.Entity("PrestamosDetalle.Data.Personas", b =>
+            modelBuilder.Entity("PrestamosDetalle.Modelos.Personas", b =>
                 {
                     b.Property<int>("PersonaId")
                         .ValueGeneratedOnAdd()
@@ -51,6 +51,45 @@ namespace PrestamosDetalle.Migrations
                     b.HasKey("PersonaId");
 
                     b.ToTable("Personas");
+                });
+
+            modelBuilder.Entity("PrestamosDetalle.Modelos.Prestamos", b =>
+                {
+                    b.Property<int>("PrestamoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Concepto")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("Monto")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PersonaId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("PrestamoId");
+
+                    b.HasIndex("PersonaId")
+                        .IsUnique();
+
+                    b.ToTable("Prestamos");
+                });
+
+            modelBuilder.Entity("PrestamosDetalle.Modelos.Prestamos", b =>
+                {
+                    b.HasOne("PrestamosDetalle.Modelos.Personas", "Personas")
+                        .WithOne("Prestamos")
+                        .HasForeignKey("PrestamosDetalle.Modelos.Prestamos", "PersonaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
