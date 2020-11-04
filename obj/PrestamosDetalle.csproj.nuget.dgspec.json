@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Aplicada2\\PrestamosDetalle\\PrestamosDetalle.csproj": {}
+    "C:\\Aplicada2\\PrestamosDetalle\\PrestamosDetalle.csproj": {}
   },
   "projects": {
-    "c:\\Aplicada2\\PrestamosDetalle\\PrestamosDetalle.csproj": {
+    "C:\\Aplicada2\\PrestamosDetalle\\PrestamosDetalle.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Aplicada2\\PrestamosDetalle\\PrestamosDetalle.csproj",
+        "projectUniqueName": "C:\\Aplicada2\\PrestamosDetalle\\PrestamosDetalle.csproj",
         "projectName": "PrestamosDetalle",
-        "projectPath": "c:\\Aplicada2\\PrestamosDetalle\\PrestamosDetalle.csproj",
+        "projectPath": "C:\\Aplicada2\\PrestamosDetalle\\PrestamosDetalle.csproj",
         "packagesPath": "C:\\Users\\Lewis Gaby\\.nuget\\packages\\",
-        "outputPath": "c:\\Aplicada2\\PrestamosDetalle\\obj\\",
+        "outputPath": "C:\\Aplicada2\\PrestamosDetalle\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

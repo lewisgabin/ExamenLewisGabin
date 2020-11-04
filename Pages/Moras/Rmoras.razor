@@ -68,21 +68,23 @@
                 <table class="table" style="border-bottom: 1px groove;">
                     <thead class="thead-dark">
                         <tr>
+                             <th scope="col">Opcion</th>
                             <th scope="col">Id</th>
                             <th scope="col">MoraId</th>
                             <th scope="col">PrestamoId</th>
                             <th scope="col">Valor</th>
+
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in mora.DetalleMora)
                         {
                             <tr>
+                                <td><button type="button" class="btn btn-danger" @onclick="(() => EliminarDetalle(item))">Eliminar</button></td>
                                 <td>@item.Id</td>
                                 <td>@item.MoraId</td>
                                 <td>@item.PrestamoId</td>
                                 <td>@item.Valor</td>
-                                <td><button type="button" class="btn btn-danger" @onclick="(() => EliminarDetalle(item))">Remover</button></td>
                             </tr>
                         }
                     </tbody>
